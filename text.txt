@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    int numCourses;
+    cout << "Enter the number of courses: ";
+    cin >> numCourses;
+
+    map<string, double> gradePoints = {
+        {"A", 4.0},
+        {"A-", 3.7},
+        {"B+", 3.3},
+        {"B", 3.0},
+        {"B-", 2.7},
+        {"C+", 2.3},
+        {"C", 2.0},
+        {"C-", 1.7},
+        {"D+", 1.3},
+        {"D", 1.0},
+        {"F", 0.0}
+    };
+
+    double totalCreditHours = 0.0;
+    double totalGradePoints = 0.0;
+
+    for (int i = 0; i < numCourses; ++i) {
+        string courseName;
+        double creditHours;
+        string grade;
+
+        cout << "Enter name of course " << i + 1 << ": ";
+        cin.ignore(); // Clear the newline character in the buffer
+        getline(cin, courseName);
+
+        cout << "Enter credit hours for " << courseName << ": ";
+        cin >> creditHours;
+
+        cout << "Enter grade for " << courseName << ": ";
+        cin >> grade;
+
+        if (gradePoints.find(grade) != gradePoints.end()) {
+            totalCreditHours += creditHours;
+            totalGradePoints += gradePoints[grade] * creditHours;
+        } else {
+            cout << "Invalid grade entered for " << courseName << ". Skipping calculation for this course." << endl;
+        }
+    }
+
+    if (totalCreditHours > 0) {
+        double cgpa = totalGradePoints / totalCreditHours;
+        cout << fixed << setprecision(2);
+        cout << "Your CGPA is: " << cgpa << endl;
+    } else {
+        cout << "No valid courses entered. Cannot calculate CGPA." << endl;
+    }
+
+    return 0;
+}
