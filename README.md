@@ -1,0 +1,5 @@
+# Semester_Project
+Boakye Bernard 
+UEB3258122
+IT B
+QUESTION 1(CGPA CALCULATOR)
